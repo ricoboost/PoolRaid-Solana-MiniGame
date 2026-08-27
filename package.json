@@ -52,7 +52,7 @@
     "jsonwebtoken": "^9.0.3",
     "next": "^16.3.3",
     "pg": "^8.20.0",
-    "react": "^19.2.4",
+    "react": "^19.2.8",
     "react-dom": "^19.2.4",
     "tweetnacl": "^1.0.3"
   },
@@ -60,7 +60,7 @@
     "@tailwindcss/postcss": "^4.2.2",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^22.19.15",
-    "@types/react": "^19.2.14",
+    "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.3",
     "@vitest/coverage-v8": "^3.2.4",
     "eslint": "^9.39.1",
