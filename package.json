@@ -1,0 +1,74 @@
+{
+  "name": "poolraid",
+  "version": "0.1.0",
+  "description": "A self-hosted, provably fair scratch-card and coin-flip game for Solana.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "check": "npm run lint && npm run typecheck && npm test && npm run build",
+    "db:generate": "prisma generate --schema prisma/schema.prisma",
+    "db:migrate": "prisma migrate deploy --config prisma/prisma.config.ts",
+    "db:seed": "prisma db seed --config prisma/prisma.config.ts"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "keywords": [
+    "solana",
+    "nextjs",
+    "prisma",
+    "provably-fair",
+    "web3"
+  ],
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "overrides": {
+    "brace-expansion@^1": "1.1.18",
+    "deepmerge-ts": "8.0.2",
+    "js-yaml@^3": "3.15.2",
+    "shell-quote": "1.10.0",
+    "uuid": "11.1.1",
+    "ws@^7": "7.5.11",
+    "ws@^8": "8.21.3"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.10.0",
+    "@prisma/client": "^7.10.0",
+    "@solana/wallet-adapter-base": "^0.9.27",
+    "@solana/wallet-adapter-phantom": "^0.9.28",
+    "@solana/wallet-adapter-react": "^0.15.39",
+    "@solana/wallet-adapter-react-ui": "^0.9.39",
+    "@solana/web3.js": "^1.98.4",
+    "bs58": "^6.0.0",
+    "jsonwebtoken": "^9.0.3",
+    "next": "^16.3.3",
+    "pg": "^8.20.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "tweetnacl": "^1.0.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.2",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^22.19.15",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitest/coverage-v8": "^3.2.4",
+    "eslint": "^9.39.1",
+    "eslint-config-next": "^16.3.3",
+    "prisma": "^7.10.0",
+    "tailwindcss": "^4.2.2",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2",
+    "vitest": "^3.2.4"
+  }
+}

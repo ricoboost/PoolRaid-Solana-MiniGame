@@ -1,0 +1,13 @@
+node_modules
+.next
+.git
+.env
+.env.local
+.env.production
+.env.*.local
+.vscode
+.idea
+.DS_Store
+*wallet*.json
+*keypair*.json
+*.pem

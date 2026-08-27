@@ -1,0 +1,138 @@
+[
+  {
+    "name": "scratch_loop",
+    "file": "01_scratch_loop.mp3"
+  },
+  {
+    "name": "zone_reveal_nothing",
+    "file": "02_zone_reveal_nothing.mp3"
+  },
+  {
+    "name": "zone_reveal_small",
+    "file": "03_zone_reveal_small.mp3"
+  },
+  {
+    "name": "zone_reveal_win",
+    "file": "04_zone_reveal_win.mp3"
+  },
+  {
+    "name": "zone_reveal_big",
+    "file": "05_zone_reveal_big.mp3"
+  },
+  {
+    "name": "zone_reveal_jackpot",
+    "file": "06_zone_reveal_jackpot.mp3"
+  },
+  {
+    "name": "raid_miss",
+    "file": "07_raid_miss.mp3"
+  },
+  {
+    "name": "raid_hit",
+    "file": "08_raid_hit.mp3"
+  },
+  {
+    "name": "raid_drain",
+    "file": "09_raid_drain.mp3"
+  },
+  {
+    "name": "free_ticket",
+    "file": "10_free_ticket.mp3"
+  },
+  {
+    "name": "free_ticket_up",
+    "file": "11_free_ticket_up.mp3"
+  },
+  {
+    "name": "all_zones_revealed",
+    "file": "12_all_zones_revealed.mp3"
+  },
+  {
+    "name": "win_result",
+    "file": "13_win_result.mp3"
+  },
+  {
+    "name": "payout_sent",
+    "file": "14_payout_sent.mp3"
+  },
+  {
+    "name": "no_win",
+    "file": "15_no_win.mp3"
+  },
+  {
+    "name": "flip_sit",
+    "file": "16_flip_sit.mp3"
+  },
+  {
+    "name": "flip_opponent_joins",
+    "file": "17_flip_opponent_joins.mp3"
+  },
+  {
+    "name": "flip_countdown_tick",
+    "file": "18_flip_countdown_tick.mp3"
+  },
+  {
+    "name": "flip_countdown_go",
+    "file": "19_flip_countdown_go.mp3"
+  },
+  {
+    "name": "coin_spinning",
+    "file": "20_coin_spinning.mp3"
+  },
+  {
+    "name": "flip_win",
+    "file": "21_flip_win.mp3"
+  },
+  {
+    "name": "flip_lose",
+    "file": "22_flip_lose.mp3"
+  },
+  {
+    "name": "flip_leave",
+    "file": "23_flip_leave.mp3"
+  },
+  {
+    "name": "button_click",
+    "file": "24_button_click.mp3"
+  },
+  {
+    "name": "wallet_connect",
+    "file": "25_wallet_connect.mp3"
+  },
+  {
+    "name": "wallet_disconnect",
+    "file": "26_wallet_disconnect.mp3"
+  },
+  {
+    "name": "error",
+    "file": "27_error.mp3"
+  },
+  {
+    "name": "achievement_unlock",
+    "file": "28_achievement_unlock.mp3"
+  },
+  {
+    "name": "level_up",
+    "file": "29_level_up.mp3"
+  },
+  {
+    "name": "streak_fire",
+    "file": "30_streak_fire.mp3"
+  },
+  {
+    "name": "copy_clipboard",
+    "file": "31_copy_clipboard.mp3"
+  },
+  {
+    "name": "notification",
+    "file": "32_notification.mp3"
+  },
+  {
+    "name": "ambient_scratch",
+    "file": "33_ambient_scratch.mp3"
+  },
+  {
+    "name": "ambient_flip",
+    "file": "34_ambient_flip.mp3"
+  }
+]

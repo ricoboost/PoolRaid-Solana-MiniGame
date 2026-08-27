@@ -1,0 +1,187 @@
+@import "tailwindcss";
+
+@theme {
+  /* ═══ OBSIDIAN SURFACE HIERARCHY ═══ */
+  --color-surface: #0e0e0e;
+  --color-surface-lowest: #141414;
+  --color-surface-low: #171717;
+  --color-surface-container: #1a1919;
+  --color-surface-high: #201f1f;
+  --color-surface-highest: #262626;
+  --color-surface-bright: #2c2c2c;
+
+  /* ═══ PRIMARY — The Pulse (success, CTA, wins) ═══ */
+  --color-primary: #34fea0;
+  --color-primary-container: #1a3d2e;
+  --color-on-primary: #0e0e0e;
+
+  /* ═══ SECONDARY — The Depth (branding, raids) ═══ */
+  --color-secondary: #b984ff;
+  --color-secondary-container: #2a1f3d;
+
+  /* ═══ TERTIARY — The Highlight (gold, prestige) ═══ */
+  --color-tertiary: #ffe792;
+  --color-tertiary-container: #3d351f;
+
+  /* ═══ SEMANTIC ═══ */
+  --color-win: #34fea0;
+  --color-lose: #ff4466;
+
+  /* ═══ TEXT ═══ */
+  --color-on-surface: #f0ece7;
+  --color-on-surface-variant: #c4c0bc;
+  --color-text-muted: #8a8686;
+  --color-text-ghost: #585555;
+
+  /* ═══ RADIUS ═══ */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* ═══ FONTS ═══ */
+  --font-display: var(--font-outfit), "Outfit", sans-serif;
+  --font-body: var(--font-plus-jakarta), "Plus Jakarta Sans", sans-serif;
+  --font-mono: var(--font-ibm-plex), "IBM Plex Mono", monospace;
+}
+
+:root {
+  /* Glows — tinted ambient, never black shadows */
+  --glow-primary: rgba(52, 254, 160, 0.08);
+  --glow-primary-strong: rgba(52, 254, 160, 0.15);
+  --glow-secondary: rgba(185, 132, 255, 0.08);
+  --glow-tertiary: rgba(255, 231, 146, 0.08);
+
+  /* Ghost borders (max 20% opacity — no-line rule) */
+  --ghost-border: rgba(72, 72, 71, 0.20);
+  --ghost-border-light: rgba(72, 72, 71, 0.10);
+
+  /* Win/Lose soft backgrounds */
+  --win-soft: rgba(52, 254, 160, 0.08);
+  --lose-soft: rgba(255, 68, 102, 0.08);
+}
+
+/* ═══ KEYFRAMES ═══ */
+@keyframes poolPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.97); }
+}
+
+@keyframes poolBarGlow {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes poolBarPulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--bar-glow); }
+  50% { opacity: 0.5; box-shadow: 0 0 2px var(--bar-glow); }
+}
+
+@keyframes zoneReveal {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes metalSpin {
+  from { --metal-angle: 0deg; }
+  to { --metal-angle: 360deg; }
+}
+
+@property --metal-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes slideReveal {
+  0% { transform: translateY(12px) scale(0.96); opacity: 0; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+@keyframes pop {
+  0% { transform: translate(0, 0) scale(0); opacity: 1; }
+  60% { opacity: 1; }
+  100% { transform: translate(var(--tx), var(--ty)) scale(1); opacity: 0; }
+}
+
+@keyframes livePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes feedIn {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes ping {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+/* ═══ COIN FLIP ANIMATIONS ═══ */
+@keyframes coinSpin {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
+@keyframes countdownPulse {
+  0% { transform: scale(0.5); opacity: 0; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes winnerGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(52,254,160,0.3); }
+  50% { box-shadow: 0 0 40px rgba(52,254,160,0.5); }
+}
+
+@keyframes seatPulse {
+  0%, 100% { border-color: rgba(52,254,160,0.3); }
+  50% { border-color: rgba(52,254,160,0.6); }
+}
+
+/* ═══ GLOBAL STYLES ═══ */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hide default Solana wallet modal — we use our custom one */
+.wallet-adapter-modal,
+.wallet-adapter-modal-wrapper,
+.wallet-adapter-modal-overlay,
+.wallet-adapter-modal-container {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
+}
+
+::selection {
+  background: rgba(52, 254, 160, 0.2);
+  color: #e6e1dc;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(72, 72, 71, 0.3);
+  border-radius: 2px;
+}
+
+/* ═══ SCROLLBAR UTILITY ═══ */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ═══ GLASSMORPHISM UTILITY ═══ */
+.glass {
+  background: rgba(26, 25, 25, 0.60);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}

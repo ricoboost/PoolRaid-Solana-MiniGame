@@ -1,0 +1,287 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Ticket {
+  id                  String    @id @default(cuid())
+  tier                String
+  priceLamports       BigInt
+  playerWallet        String
+  depositTx           String?   @unique
+  depositMemo         String?   @unique
+  depositExpiresAt    DateTime?
+  referralCode        String?
+  seedHash            String
+  seed                String?
+  zone1Result         Json?
+  zone2Result         Json?
+  zone3Result         Json?
+  totalPayoutLamports BigInt    @default(0)
+  payoutTx            String?
+  payoutStatus        String?
+  status              String    @default("pending")
+  isFreeTicket        Boolean   @default(false)
+  createdAt           DateTime  @default(now())
+  scratchedAt         DateTime?
+
+  @@index([playerWallet])
+  @@index([status])
+  @@index([tier])
+}
+
+model Pool {
+  id               String   @id @default(cuid())
+  tier             String   @unique
+  balanceLamports  BigInt   @default(0)
+  totalInLamports  BigInt   @default(0)
+  totalOutLamports BigInt   @default(0)
+  ticketCount      Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model GameConfig {
+  id                  String  @id @default(cuid())
+  tier                String  @unique
+  ticketPriceLamports BigInt
+  houseCutBps         Int     @default(1000)
+  bootstrapCount      Int     @default(100)
+  isActive            Boolean @default(true)
+}
+
+model HouseProfit {
+  id                   String   @id @default(cuid())
+  totalProfitLamports  BigInt   @default(0)
+  updatedAt            DateTime @updatedAt
+}
+
+model PlayerProfile {
+  wallet        String   @id
+  displayName   String?
+  avatar        String?
+  isPublic      Boolean  @default(false)
+  currentStreak Int      @default(0)
+  bestStreak    Int      @default(0)
+  totalXp       Int      @default(0)
+  level         Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Achievement {
+  id            String   @id @default(cuid())
+  wallet        String
+  achievementId String
+  unlockedAt    DateTime @default(now())
+
+  @@unique([wallet, achievementId])
+  @@index([wallet])
+}
+
+model ReferralCode {
+  id        String   @id @default(cuid())
+  wallet    String   @unique
+  code      String   @unique
+  createdAt DateTime @default(now())
+}
+
+model Referral {
+  id             String   @id @default(cuid())
+  referrerWallet String
+  referredWallet String   @unique
+  code           String
+  bonusPaid      Boolean  @default(false)
+  createdAt      DateTime @default(now())
+
+  @@index([referrerWallet])
+}
+
+model RateLimit {
+  id        String   @id @default(cuid())
+  wallet    String
+  action    String
+  timestamp DateTime @default(now())
+
+  @@index([wallet, action, timestamp])
+}
+
+model SelfExclusion {
+  id            String   @id @default(cuid())
+  walletAddress String
+  excludeUntil  DateTime
+  isPermanent   Boolean  @default(false)
+  createdAt     DateTime @default(now())
+
+  @@index([walletAddress])
+}
+
+model UserDeclaration {
+  id            String   @id @default(cuid())
+  walletAddress String   @unique
+  ipCountry     String
+  declaredAt    DateTime @default(now())
+}
+
+model SystemConfig {
+  id    String @id @default("global")
+  key   String @unique
+  value String
+}
+
+model GiveawayLog {
+  id            String   @id @default(cuid())
+  walletAddress String
+  tier          String
+  count         Int
+  createdAt     DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+model AdminLog {
+  id        String   @id @default(cuid())
+  action    String
+  details   String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+model AuthNonce {
+  id        String    @id @default(cuid())
+  wallet    String
+  purpose   String
+  nonce     String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([wallet, purpose, expiresAt])
+}
+
+model Deposit {
+  signature      String   @id
+  wallet         String
+  recipient      String
+  amountLamports BigInt
+  memo           String
+  purpose        String
+  referenceId    String
+  createdAt      DateTime @default(now())
+
+  @@unique([purpose, referenceId])
+  @@index([wallet, createdAt])
+}
+
+model Payout {
+  id              String   @id @default(cuid())
+  businessKey     String   @unique
+  kind            String
+  recipientWallet String
+  amountLamports  BigInt
+  status          String   @default("pending")
+  signature       String?  @unique
+  lastError       String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([status, updatedAt])
+  @@index([recipientWallet])
+}
+
+model PayoutAttempt {
+  id                   String   @id @default(cuid())
+  payoutId             String
+  signature            String   @unique
+  signedTransaction    String
+  blockhash            String
+  lastValidBlockHeight BigInt
+  status               String   @default("signed")
+  error                String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  @@index([payoutId, createdAt])
+  @@index([status])
+}
+
+model FlipReservation {
+  id             String    @id @default(cuid())
+  roomId         String
+  wallet         String
+  side           String
+  seat           String
+  amountLamports BigInt
+  memo           String    @unique
+  status         String    @default("pending")
+  txSignature    String?   @unique
+  expiresAt      DateTime
+  createdAt      DateTime  @default(now())
+  confirmedAt    DateTime?
+
+  @@index([roomId, status])
+  @@index([wallet, status])
+}
+
+model FlipRoom {
+  id                  String    @id @default(cuid())
+  roomSlot            Int
+  tierLamports        BigInt
+  status              String    @default("empty")
+  activeReservationId String?
+
+  playerAWallet   String?
+  playerASide     String?
+  playerATx       String?   @unique
+  playerASeatedAt DateTime?
+
+  playerBWallet   String?
+  playerBSide     String?
+  playerBTx       String?   @unique
+  playerBSeatedAt DateTime?
+
+  serverSeedHash String?
+  serverSeed     String?
+  result         String?
+  winnerWallet   String?
+
+  payoutLamports    BigInt?
+  payoutTx           String?
+  payoutStatus       String?
+  houseRakeLamports BigInt?
+
+  completedAt DateTime?
+  resetAt     DateTime?
+
+  @@unique([roomSlot, tierLamports])
+  @@index([tierLamports, status])
+  @@index([playerAWallet])
+  @@index([playerBWallet])
+  @@index([status])
+}
+
+model FlipHistory {
+  id                String   @id @default(cuid())
+  tierLamports      BigInt
+  playerAWallet     String
+  playerBWallet     String
+  winnerWallet      String
+  result            String
+  potLamports       BigInt
+  payoutLamports    BigInt
+  houseRakeLamports BigInt
+  payoutTx          String?
+  payoutStatus      String?
+  serverSeed        String
+  serverSeedHash    String   @unique
+  completedAt       DateTime @default(now())
+
+  @@index([completedAt])
+  @@index([playerAWallet])
+  @@index([playerBWallet])
+}

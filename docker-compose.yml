@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: poolraid
+      POSTGRES_USER: poolraid
+      POSTGRES_PASSWORD: poolraid
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U poolraid -d poolraid"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - poolraid-postgres:/var/lib/postgresql/data
+
+volumes:
+  poolraid-postgres:

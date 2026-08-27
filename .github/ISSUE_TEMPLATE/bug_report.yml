@@ -1,0 +1,38 @@
+name: Bug report
+description: Report a reproducible defect that is not security-sensitive
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Do not disclose vulnerabilities, secrets, or real-fund incidents here. Follow SECURITY.md instead.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Provide minimal devnet steps using disposable data.
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Commit or version
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Node version, browser/wallet, and Solana cluster. Redact URLs and credentials.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Sanitized logs
+      render: shell
